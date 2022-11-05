@@ -36,7 +36,6 @@
 
 
 
-
                 var currentPosition = new google.maps.Marker({
                     position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
                     map: peta
@@ -48,6 +47,11 @@
                     ":-0.031702902340485034,109.33058377445151/json?key=SAfBqMnUwz2QldjopBAQHtrnQdXMTO7m";
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", url);
+
+
+                document.getElementById("Latitude").value = position.coords.latitude;
+                document.getElementById("Longitude").value = position.coords.longitude;
+
 
 
 
@@ -82,8 +86,8 @@
                         });
                     }
                 };
-                xhr.send();
 
+                xhr.send();
 
 
 
@@ -115,7 +119,14 @@
 
 
                 <div class="text-end">
-                    <a href="/serch"><button type="button" class="btn btn-outline-light me-2">Cari</button></a>
+
+                    <form method="post" action="{{ route('searchs') }}">
+                        @csrf
+                        <input type="text" name="Latitude" id="Latitude">
+                        <input type="text" name="Longitude" id="Longitude">
+                        <button type="submit" class="btn btn-outline-light me-2">Cari</button>
+                    </form>
+
                     <a href="/admin"> <button type="button" class="btn btn-warning">Login</button></a>
 
                 </div>
@@ -127,7 +138,10 @@
         <div id="googleMap" style="width:70vw;height:500px;"></div>
     </div>
 
+
     <button onclick="getjarak()">Nya :3</button>
+    <p id="demo">halooo</p>
+
 
 
 
@@ -138,7 +152,7 @@
                 var x = document.getElementById("demo");
                 var url = "https://api.tomtom.com/routing/1/calculateRoute/" + position.coords.latitude + "," +
                     position.coords.longitude +
-                    ":-0.07175940254150072,109.37551033527046/json?key=SAfBqMnUwz2QldjopBAQHtrnQdXMTO7m";
+                    ":-0.031702902340485034,109.33058377445151/json?key=SAfBqMnUwz2QldjopBAQHtrnQdXMTO7m";
 
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", url);

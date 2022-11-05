@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class KostController extends Controller
 {
@@ -15,6 +16,7 @@ class KostController extends Controller
     public function index()
     {
         //
+
         $dbKost = Kost::all();
         return view('index', compact('dbKost'));
     }
@@ -57,13 +59,20 @@ class KostController extends Controller
     }
 
 
-    public function search()
+    public function search(Request $request)
     {
         //
         $dbKost = Kost::all();
-        
-        return view('Admin.Kost.data-kost', compact('dbKost'));
+        $lat = $request->input('Latitude');
+        $lon = $request->input('Longitude');
+        $data = Http::get('https://api.tomtom.com/routing/1/calculateRoute/',$lat, ',',$lon,':-0.031702902340485034,109.33058377445151/json?key=SAfBqMnUwz2QldjopBAQHtrnQdXMTO7m')->json();
+
+        return view('search',compact('data'));
+
+
+
     }
+
 
 
     /**

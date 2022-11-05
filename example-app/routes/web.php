@@ -18,5 +18,6 @@ Route::get('/', [KostController::class, 'index']);
 Route::get('/admin', [KostController::class, 'admindata'], [])->name('adminlist');
 Route::get('/input', [KostController::class, 'admininput'], [])->name('admininput');
 Route::post('/simpankost', [KostController::class, 'simpankost'])->name('simpankost');
+Route::post('/search', [KostController::class, 'search'])->name('searchs');
 
 
